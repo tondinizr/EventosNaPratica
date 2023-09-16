@@ -122,6 +122,6 @@ class User {
 - Devemos pesquisar o cep na api do ViaCep (https://viacep.com.br) e no sucesso preencher o campo reservado para o endereço (#adress) com os valores na seguinte sequencia: `${data.logradouro}, ${data.bairro}, ${data.localidade}/${data.uf}`; E no erro devemos exibir um toast com informando o erro;
 - Ao enviar o formulário devemos consolar o usuário no console e exibir um toast de sucesso!
 
-## Conclusão
+## Conclusão - Teste
 
 Espero que este guia ajude você a conduzir uma aula eficaz sobre eventos HTML/CSS/JavaScript usando este projeto como exemplo. Encoraje os alunos a explorarem ainda mais o código e a desenvolverem suas habilidades de programação web.
