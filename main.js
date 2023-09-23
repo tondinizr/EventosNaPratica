@@ -1,6 +1,8 @@
 const changeColor = document.querySelector('#changeColor');
 const aniversario = document.getElementById('birthday');
 const idadeInput = document.getElementById('age');
+const cepInput = document.getElementById('cep');
+const searchBtn = document.getElementById('searchCep')
 
 let color = 'rgb(255,255,255)';
 
@@ -33,6 +35,24 @@ function calcularIdade(dataNascimento){
     return idade;
 }
 
+function buscarEnderecoPorCep(cep){
+    const apiUrl = `https://viacep.com.br/ws/${cep}/json`
+    
+    fetch(apiUrl)
+        .then(response => {
+            if(!response.ok){
+                throw new Error('erro')
+            }
+            return response.jons();
+        })
+        .then(dados => {
+            console.log('dados:  '. fados)
+        })
+        .catch(erro => {
+            console.log('falha:  '. erro)
+        })
+}
+
 // EventLsiternes
 
 
@@ -57,4 +77,26 @@ aniversario.addEventListener('change', function() {
     const idade = calcularIdade(dataNascimento);
     idadeInput.value = idade;
     idadeInput.classList.add('hasValue');
+})
+
+cepInput.addEventListener('input', function (e) {
+    let value = e.target.value;
+    // 00.000-000
+    value = value.replace(/\D/g, '');
+    if(value.length >= 2) {
+       value = value.substring(0,2) + '.' + value.substring(2);
+    }
+    if(value.length >= 6){
+        value = value.substring(0,6) + '-' + value.substring(6);
+    }
+    e.target.value = value;
+
+})
+
+searchBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    const valueCep = cepInput.value
+        .replace('.','')
+        .replace('-','');
+    buscarEnderecoPorCep(valueCep);
 })
